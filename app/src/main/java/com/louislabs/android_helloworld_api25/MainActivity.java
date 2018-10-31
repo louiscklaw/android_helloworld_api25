@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 //    ArrayList<String> items_name;
@@ -22,12 +23,20 @@ public class MainActivity extends AppCompatActivity {
     ArrayAdapter<String> itemsAdapter;
     ListView lvItems;
 
+    List<String> l_parts_description = new ArrayList<String>();
+
+
+
     public void init_parts_list(){
         for (int i=0; i < 10; i++){
+            Random rand = new Random();
+
+            int int_part_random = rand.nextInt(2);
+            String leading_zero_tag_ID = String.format("%09d",rand.nextInt(999999)+100000);
 
             l_string = new ArrayList<String>();
-            l_string.add(String.format("<tag ID %d>", i));
-            l_string.add("aluminium nuts");
+            l_string.add(String.format("<tag ID %d>: %s", i, leading_zero_tag_ID));
+            l_string.add(l_parts_description.get(int_part_random));
             test_ll_string.add(l_string);
         }
 
@@ -37,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        l_parts_description.add("aluminium nuts");
+        l_parts_description.add("aluminium scaffold");
 
         lvItems = (ListView)findViewById(R.id.lvItems);
 //        items = new ArrayList<>();
